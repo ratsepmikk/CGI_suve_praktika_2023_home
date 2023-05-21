@@ -1,1 +1,19 @@
-<pre>{{book$ | async | json}}</pre>
+<!-- <pre>{{book$ | async | json}}</pre> -->
+<div class="container mat-elevation-z4">
+  <mat-card *ngIf="(book$ | async) as book">
+    <mat-card-title>{{book.title}}</mat-card-title>
+    <mat-card-content>
+      <p>Book ID: {{book.id}}</p>
+      <p>Title: {{book.title}}</p>
+      <p>Author: {{book.author}}</p>
+      <p>Genre: {{book.genre}}</p>
+      <p>Year: {{book.year}}</p>
+      <p>Added?: {{book.added}}</p>
+      <p>CheckOutCount: {{book.checkOutCount}}</p>
+      <p>Status: {{book.status}}</p>
+      <p>Due date: {{book.dueDate}}</p>
+      <p>Comment: {{book.comment}}</p>
+      <button mat-button ng-click="deleteBook()">Delete</button>
+    </mat-card-content>
+  </mat-card>
+</div>
