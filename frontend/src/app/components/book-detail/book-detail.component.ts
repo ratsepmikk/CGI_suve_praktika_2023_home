@@ -12,7 +12,7 @@ import { map, switchMap } from 'rxjs/operators';
 })
 export class BookDetailComponent implements OnInit {
   book$!: Observable<Book>;
-  bookService$!: BookService;
+  // bookService$!: BookService;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,10 +26,10 @@ export class BookDetailComponent implements OnInit {
       .pipe(switchMap(id => this.bookService.getBook(id)))
     // this.bookService$ = this.bookService
   }
-  deleteBook(): void {
-    this.route.params
-      .pipe(map(params => params['id']))
-      .pipe(switchMap(id => this.bookService.deleteBook(id)))
-  }
+  // deleteBook(): void {
+  //   this.route.params
+  //     .pipe(map(params => params['id']))
+  //     .pipe(switchMap(id => this.bookService.deleteBook(id)))
+  // }
 
 }
