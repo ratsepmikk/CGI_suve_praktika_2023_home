@@ -1,0 +1,38 @@
+#navbar,
+#navbar-list {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  height: var(--navbar-height);
+}
+
+#navbar {
+  background-color: var(--color-dark);
+}
+
+#navbar-list {
+  align-items: center;
+}
+
+.navbar-item {
+  display: flex;
+  width: fit-content;
+  margin: 0 1rem 0 0;
+  font-size: 1.5rem;
+  border-radius: 16px;
+  padding: 0.2rem;
+}
+
+.navbar-item>a {
+  color: var(--color-background);
+}
+
+.navbar-item:hover {
+  background-color: var(--color-light);
+}
+
+.navbar-item:first-child {
+  margin: 0 1rem 0 0.6rem;
+}

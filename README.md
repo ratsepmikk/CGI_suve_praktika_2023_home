@@ -54,14 +54,14 @@ If you have any questions, please reach out without hesitation. Best of luck!
 
 ##Development tasks
 
-* Using backend api endpoint /getBooks, implement table of books view
-* Using backend api endpoint /getCheckouts, also implement the checkouts view. Suppport paging and sorting for both views
-* Implement individual book and checkout view, support basic CRUD operations, implement checking out and returning books
-* Implement searching for books using freetext criteria
-* Implement filtering for books by status
-* Implement saving / displaying favorite books for current user (you can use localStorage if you don't want to make back-end changes)
-* Add modal confirmation dialogues when deleting or checking out books
-* Implement a user-friendly way to display late checkouts
+* Using backend api endpoint /getBooks, implement table of books view || Needs CSS
+* Using backend api endpoint /getCheckouts, also implement the checkouts view. Suppport paging and sorting for both views || - implement
+* Implement individual book and checkout view, support basic CRUD operations, implement checking out and returning books || Needs CSS and checkout view
+* Implement searching for books using freetext criteria || - implement
+* Implement filtering for books by status || - implement
+* Implement saving / displaying favorite books for current user (you can use localStorage if you don't want to make back-end changes) || Needs favourite books view
+* Add modal confirmation dialogues when deleting or checking out books || Implement "Are you sure" modal
+* Implement a user-friendly way to display late checkouts || Checkouts that are past due Date
 
 #####Bonus tasks:
 * Implement advanced search form for books, where user can specify and combine different criterias (title, author year etc)

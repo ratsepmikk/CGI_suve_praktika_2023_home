@@ -76,8 +76,10 @@ body {
 }
 
 html,
-body {
+body,
+#root {
   height: 100%;
+  width: 100%;
 }
 
 /* Global box-sizing */
@@ -96,8 +98,8 @@ body {
 
 /* Links */
 a {
-  color: #007bff;
-  text-decoration: none;
+  /* color: #007bff; */
+  text-decoration: none !important;
 }
 
 a:hover {
@@ -147,4 +149,25 @@ code {
 
 button {
   cursor: pointer;
+}
+
+/* Randomly colored variables chosen by my random color generating friend */
+* {
+  /* Cream*/
+  --color-background: #F4EBD0;
+  /* Charcoal */
+  --color-high-contrast: #122620;
+  /* Gold */
+  --color-light: #D6AD60;
+  /* Tan */
+  --color-dark: #B68D40;
+
+  --navbar-height: 3.5rem;
+}
+
+#main {
+  width: 100%;
+  height: calc(100% - var(--navbar-height));
+  /* height: 100%; */
+  background-color: var(--color-background);
 }

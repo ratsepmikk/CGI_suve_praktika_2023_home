@@ -3,9 +3,9 @@ import { useState } from "react"
 export function Pagination() {
   const [loading, setLoading] = useState(false)
   // Current stats
-  const [pageSize, setPageSize] = useState(30);
+  const [pageSize, setPageSize] = useState(20);
   const [pageNumber, setPageNumber] = useState(0);
-  const [numberOfElements, setNumberOfElements] = useState(20) // currently stored?
+  const [numberOfElements, setNumberOfElements] = useState(20) // items on current page? (Needs implementation)
   // Backend stats
   const [totalPages, setTotalPages] = useState(50)
   const [totalElements, setTotalElements] = useState(1000) // total Elements in backEnd

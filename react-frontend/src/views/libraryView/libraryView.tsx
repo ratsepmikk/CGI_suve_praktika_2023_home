@@ -20,10 +20,10 @@ export function LibraryView() {
   const navigate = useNavigate();
 
   const [libraryLoaded, setLoadingState] = useState(false)
-  const [data, setData] = useState<Book[]>()
+  const [books, setBooks] = useState<Book[]>()
 
   const openBook = (id: string) => {
-    console.log("Implement book page and load it, ID: " + id)
+    console.log("Implement singular book page and load it, ID: " + id)
     navigate(`/book/${id}`)
   }
 
@@ -33,34 +33,43 @@ export function LibraryView() {
         .then((response) => {
           response.json().then((data) => {
             console.table(data.content);
-            setData(() => { return data.content });
+            setBooks(() => { return data.content });
             setLoadingState(() => { return true });
           })
         })
         .catch((err) => { console.error(err) });
       return
     }
-    console.log("Data received!")
+    console.log("Books list received!")
   }, [libraryLoaded])
 
   if (libraryLoaded) {
     return (
-      <>
-        <ul id="library">
-          {data?.map((book, key) => {
-            return (
-              <li className="library-card" key={key} onClick={() => { openBook(book.id) }}>
-                <p>This is a book called: {book.title}</p>
-              </li>
-            )
-          })}
-        </ul>
+      <main id="main">
+        <table id="book-list">
+          <thead className="book-list-header">
+            <tr className="book-list-header-row">
+              <th className="book-list-header-item">Book title: </th>
+              <th className="book-list-header-item">Status: </th>
+            </tr>
+          </thead>
+          <tbody className="book-list-body">
+            {books?.map((book, key) => {
+              return (
+                <tr className="book-list-row" key={key} onClick={() => { openBook(book.id) }}>
+                  <td className="book-list-field">{book.title}</td>
+                  <td className="book-list-field">{book.status}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
         <Pagination />
-      </>
+      </main>
     )
   }
 
   return (
-    <p>This will be a view of all the books a.k.a the library</p>
+    <main id="main"><p>This will be a view of all the books a.k.a the library</p></main>
   )
 }

@@ -38,7 +38,7 @@ export function BookView() {
 
   const checkout = () => {
     console.log("Opening a checkout modal")
-    navigate(`/book/:${id}/checkout`)
+    navigate(`/checkout/add/:${id}`)
   }
 
   if (loading) {
@@ -46,7 +46,7 @@ export function BookView() {
   }
 
   return (
-    <>
+    <main id="main">
       <p>{book?.id}</p>
       <p>{book?.title}</p>
       <p>{book?.author}</p>
@@ -56,8 +56,8 @@ export function BookView() {
       <p>CheckOut's: {book?.checkOutCount}</p>
       <p>Status: {book?.status}</p>
       {book?.status === "BORROWED" ? (<p>Due Date: {book?.dueDate}</p>) : (<></>)}
-      {book?.status === "BORROWED" ? (<></>) : (<button onClick={() => { checkout() }}>Borrow</button>)}
+      {book?.status === "AVAILABLE" ? (<button onClick={() => { checkout() }}>Borrow</button>) : (<></>)}
       <p>Comment: {book?.comment}</p>
-    </>
+    </main>
   )
 }
