@@ -1,0 +1,42 @@
+.borrow-form-container {
+  height: 100%;
+  padding: 5rem 0;
+}
+
+#form-title {
+  font-size: 1.6rem
+}
+
+#borrow-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 80%;
+  margin: auto;
+
+  background-color: var(--color-light);
+  border-radius: 16px;
+}
+
+.borrow-form-input {
+  font-size: 20px;
+  margin: 1rem 0;
+}
+
+.borrow-form-input:first-child {
+  margin-top: 0.5rem;
+}
+
+.borrow-form-input:last-child {
+  margin-bottom: 0.5rem;
+}
+
+.borrow-form-text-input {
+  width: 16rem;
+}
+
+.borrow-form-search-input {
+  width: fit-content;
+}

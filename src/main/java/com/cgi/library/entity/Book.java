@@ -16,8 +16,8 @@ public class Book {
 
     @Id
     @Column
-    @Type(type="uuid-char")
-    private UUID id;
+    @Type(type = "uuid-char")
+    private UUID id = UUID.randomUUID();
 
     @Column
     private String title;

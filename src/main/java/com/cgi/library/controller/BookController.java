@@ -31,8 +31,12 @@ public class BookController {
     }
 
     @PostMapping(value = "saveBook")
-    public ResponseEntity<String> saveBook(@RequestBody BookDTO book) {
-        return ResponseEntity.ok(String.valueOf(bookService.saveBook(book)));
+    public ResponseEntity<UUID> saveBook(@RequestBody BookDTO book) {
+        if (book.getId() == null) {
+            book.setId(UUID.randomUUID());
+        }
+        bookService.saveBook(book);
+        return ResponseEntity.ok(book.getId());
     }
 
     @DeleteMapping(value = "deleteBook")

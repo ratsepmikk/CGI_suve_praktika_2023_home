@@ -1,13 +1,13 @@
-.borrow-form-container {
+.book-form-container {
   height: 100%;
   padding: 5rem 0;
 }
 
-#form-title {
+#book-form-title {
   font-size: 1.6rem
 }
 
-#borrow-form {
+#book-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,25 +17,26 @@
   margin: auto;
 
   background-color: var(--color-light);
+  border-radius: 16px;
 }
 
-.borrow-form-input {
+.book-form-input {
   font-size: 20px;
   margin: 1rem 0;
 }
 
-.borrow-form-input:first-child {
+.book-form-input:first-child {
   margin-top: 0.5rem;
 }
 
-.borrow-form-input:last-child {
+.book-form-input:last-child {
   margin-bottom: 0.5rem;
 }
 
-.borrow-form-text-input {
+.book-form-text-input {
   width: 16rem;
 }
 
-.borrow-form-search-input {
+.book-form-search-input {
   width: fit-content;
 }
