@@ -4,7 +4,8 @@ import com.cgi.library.model.CheckOutDTO;
 import com.cgi.library.service.CheckOutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+// import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +19,10 @@ public class CheckOutController {
     private CheckOutService checkOutService;
 
     @GetMapping(value = "getCheckouts")
-    public ResponseEntity<Page<CheckOutDTO>> getCheckOuts(Pageable pageable) {
-        return ResponseEntity.ok(checkOutService.getCheckOuts(pageable));
+    public ResponseEntity<Page<CheckOutDTO>> getCheckOuts(@RequestParam(value = "pageSize") int pageSize,
+            @RequestParam(value = "pageNumber") int pageNumber) {
+        PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
+        return ResponseEntity.ok(checkOutService.getCheckOuts(pageRequest));
     }
 
     @GetMapping(value = "getCheckout")

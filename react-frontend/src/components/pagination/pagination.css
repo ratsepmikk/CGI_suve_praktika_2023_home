@@ -3,3 +3,11 @@
   width: 100%;
   flex-direction: row;
 }
+
+.pagination-bar>* {
+  margin: 0 0.2rem;
+}
+
+.pagination.input {
+  width: fit-content;
+}
