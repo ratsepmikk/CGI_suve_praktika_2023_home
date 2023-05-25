@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from 'react-router-dom';
-import { Pagination } from "../../components/pagination/pagination"
+import { Pagination, PaginationParams, PaginationData } from "../../components/pagination/pagination"
 
 import "./libraryView.css"
 
@@ -22,18 +22,42 @@ export function LibraryView() {
   const [libraryLoaded, setLoadingState] = useState(false)
   const [books, setBooks] = useState<Book[]>()
 
+  const [pageData, setPageData] = useState<PaginationData>({ pageSize: 0, pageNumber: 0, numberOfElements: 0, totalPages: 0, totalElements: 0 })
+
   const openBook = (id: string) => {
     console.log("Implement singular book page and load it, ID: " + id)
     navigate(`/book/${id}`)
   }
+
+  const handlePageChange = (tryAdd: boolean) => {
+    tryAdd ?
+      setPageData((prev) => {
+        function nextPage(current: number, max: number) { return max > current + 1 ? current + 1 : current }
+        return { ...prev, pageNumber: nextPage(prev.pageNumber, prev.totalPages) }
+      }) :
+      setPageData((prev) => {
+        function prevPage(prev: number) { return prev <= 0 ? 0 : prev - 1 }
+        return { ...prev, pageNumber: prevPage(prev.pageNumber) }
+      })
+  };
 
   useEffect(() => {
     if (!libraryLoaded) {
       fetch(baseURL + "/getBooks")
         .then((response) => {
           response.json().then((data) => {
+            console.log(data)
             console.table(data.content);
             setBooks(() => { return data.content });
+            setPageData(() => {
+              return {
+                pageSize: data.pageable.pageSize,
+                pageNumber: data.pageable.pageNumber,
+                numberOfElements: data.size,
+                totalPages: data.totalPages,
+                totalElements: data.totalElements,
+              }
+            })
             setLoadingState(() => { return true });
           })
         })
@@ -64,7 +88,7 @@ export function LibraryView() {
             })}
           </tbody>
         </table>
-        <Pagination />
+        <Pagination {...{ pageData: pageData, setPageData: setPageData, onPageChange: handlePageChange }} />
       </main>
     )
   }

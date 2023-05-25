@@ -27,13 +27,24 @@ public class CheckOutController {
         return ResponseEntity.ok(checkOutService.getCheckOut(checkOutId));
     }
 
-    @PostMapping(value = "checkout")
+    @PostMapping(value = "saveCheckout")
     public ResponseEntity<String> saveCheckOut(@RequestBody CheckOutDTO checkOutDTO) {
+        if (checkOutDTO.getId() == null) {
+            checkOutDTO.setId(UUID.randomUUID());
+        }
         checkOutService.saveCheckOut(checkOutDTO);
         return ResponseEntity.ok("");
     }
 
-    @DeleteMapping(value = "checkout")
+    @PutMapping(value = "updateCheckout")
+    public ResponseEntity<String> updateCheckOut(
+            @PathVariable @RequestParam(value = "checkOutId") UUID checkOutId,
+            @RequestBody CheckOutDTO checkOutDTO) {
+        checkOutService.updateCheckOut(checkOutId, checkOutDTO);
+        return ResponseEntity.ok("");
+    }
+
+    @DeleteMapping(value = "delCheckout")
     public ResponseEntity<String> deleteCheckOut(@RequestParam(value = "checkOutId") UUID checkOutId) {
         checkOutService.deleteCheckOut(checkOutId);
         return ResponseEntity.ok("");

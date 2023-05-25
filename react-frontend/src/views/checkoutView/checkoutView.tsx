@@ -12,7 +12,7 @@ type BookStatus =
   | 'DAMAGED'
   | 'PROCESSING';
 
-type Book = { id: string, title: string, author: string, genre: string, year: number, added: string, checkOutCount: number, status: BookStatus, dueDate: string, comment: string }
+type Book = { id: string, title: string, author: string, genre: string, year: number, added: string, checkOutCount: number, status: BookStatus, dueDate: string | undefined, comment: string }
 
 type CheckOut = {
   id: string,
@@ -44,7 +44,35 @@ export function CheckoutView() {
         })
         .catch((err) => { console.error(err) })
     }
-  }, [id])
+  }, [loading])
+
+  const returnBook = (bookId: string | undefined) => {
+    if (bookId === undefined) { console.error("bookId is undefined"); return }
+    console.log("I want to return a book with bookId: " + bookId)
+    if (!checkout) { console.error("Empty checkout data"); return }
+    let checkoutCopy = { ...checkout, borrowedBook: { ...checkout.borrowedBook } }
+    checkoutCopy.returnedDate = new Date().toISOString().slice(0, 10);
+    checkoutCopy.borrowedBook.status = "RETURNED";
+    console.log("------------------->", JSON.stringify(checkoutCopy))
+    let requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(checkoutCopy)
+    };
+    fetch(baseURL + '/saveCheckout', requestOptions)
+      .then(() => { console.log("Checkout save success"); setLoadingState(() => true) })
+      .catch(console.error)
+    requestOptions = {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(checkoutCopy.borrowedBook)
+    }
+    fetch(backendURL + `/api/book/saveBook`, requestOptions)
+      .then(() => { console.log("Book save success"); setLoadingState(() => true) })
+      .catch(console.error)
+  }
 
   if (loading) {
     return (
@@ -57,7 +85,7 @@ export function CheckoutView() {
       <p>Borrower: {checkout?.borrowerFirstName} {checkout?.borrowerLastName}</p>
       <p>Checked out at: {checkout?.checkedOutDate}</p>
       <p>Due date: {checkout?.dueDate}</p>
-      {checkout?.returnedDate ? checkout?.returnedDate : "Not returned"}
+      {checkout?.returnedDate ? (<p>Returned at: {checkout?.returnedDate}</p>) : (<button onClick={() => { returnBook(checkout?.borrowedBook?.id) }}>Return book</button>)}
     </main>
   )
 }

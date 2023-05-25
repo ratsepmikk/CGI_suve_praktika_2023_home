@@ -13,8 +13,8 @@ public class CheckOut {
 
     @Id
     @Column
-    @Type(type="uuid-char")
-    private UUID id;
+    @Type(type = "uuid-char")
+    private UUID id = UUID.randomUUID();
 
     @Column(name = "borrower_first_name")
     private String borrowerFirstName;

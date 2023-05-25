@@ -32,6 +32,21 @@ public class CheckOutService {
         checkOutRepository.save(ModelMapperFactory.getMapper().map(checkOutDTO, CheckOut.class));
     }
 
+    public void updateCheckOut(UUID checkOutId, CheckOutDTO checkOutDTO) {
+        CheckOut existingCheckOut = checkOutRepository.getOne(checkOutId);
+        if (existingCheckOut != null) {
+            // Update the existing checkout entity with the data from the DTO
+            ModelMapper modelMapper = ModelMapperFactory.getMapper();
+            modelMapper.map(checkOutDTO, existingCheckOut);
+
+            // Save the updated checkout entity to the database
+            checkOutRepository.save(existingCheckOut);
+        } else {
+            // Handle the case where the checkout does not exist
+            throw new RuntimeException("Checkout not found with ID: " + checkOutId);
+        }
+    }
+
     public void deleteCheckOut(UUID checkOutId) {
         checkOutRepository.deleteById(checkOutId);
     }

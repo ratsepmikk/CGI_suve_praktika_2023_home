@@ -23,7 +23,6 @@
 }
 
 .checkout-list-row:nth-child(2n-1) {
-  /* background-color: rebeccapurple; */
   background: linear-gradient(to right, var(--color-light), var(--color-background));
 }
 

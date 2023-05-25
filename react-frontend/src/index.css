@@ -70,7 +70,8 @@ td {
 
 /* Set default font family and size */
 body {
-  font-family: Arial, sans-serif;
+  /* font-family: Arial, sans-serif; */
+  font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 16px;
   line-height: 1.5;
 }
@@ -98,7 +99,6 @@ body,
 
 /* Links */
 a {
-  /* color: #007bff; */
   text-decoration: none !important;
 }
 
